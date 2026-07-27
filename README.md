@@ -1,4 +1,4 @@
-# AWS Lambda Automation Assignments
+# AWS Lambda Automation Assignments with Lambda & Boto3
 
 ## Overview
 
