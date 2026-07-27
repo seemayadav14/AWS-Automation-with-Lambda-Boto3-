@@ -354,9 +354,9 @@ Include the following screenshots in your GitHub repository:
 # Repository Structure
 
 ```
-Restore-EC2-From-Snapshot/
+Assignment4/
 │
-├── README.md
+├── Assignment4.md
 ├── lambda_function.py
 └── screenshots/
     ├── ec2-instance.png
@@ -386,10 +386,6 @@ After completing this project, you will understand:
 - Boto3 EC2 operations
 
 ---
-
-# Author
-
-**Name:** Seema Yadav
 
 **Technology Stack**
 
