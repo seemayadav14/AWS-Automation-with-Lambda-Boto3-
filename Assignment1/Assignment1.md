@@ -166,7 +166,7 @@ from datetime import datetime, timezone, timedelta
 
 s3 = boto3.client("s3")
 
-BUCKET_NAME = "YOUR_BUCKET_NAME"
+BUCKET_NAME = "seema-s3-cleanup-bucket"
 
 def lambda_function(event, context):
 
@@ -210,7 +210,7 @@ def lambda_function(event, context):
 Replace:
 
 ```
-YOUR_BUCKET_NAME
+seema-s3-cleanup-bucket
 ```
 
 with your bucket name.
