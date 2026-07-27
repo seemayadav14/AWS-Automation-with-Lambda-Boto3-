@@ -104,18 +104,6 @@ This project demonstrates disaster recovery automation by locating the most rece
 
 ---
 
-# Repository Structure
-
-```
-AWS-Lambda-Automation/
-│
-├── Automated-S3-Cleanup/
-│   ├── lambda_function.py
-│   ├── README.md
-│   └── screenshots/
-│
-
----
 
 # Technologies Used
 
@@ -130,24 +118,3 @@ AWS-Lambda-Automation/
 - Amazon CloudWatch
 
 ---
-
-# Learning Outcomes
-
-After completing these assignments, you will be able to:
-
-- Automate AWS infrastructure using Lambda.
-- Work with the Boto3 SDK for AWS services.
-- Configure IAM roles using least-privilege access.
-- Schedule automation with Amazon EventBridge.
-- Monitor Lambda executions using CloudWatch Logs.
-- Automate backups and disaster recovery.
-- Implement EC2 resource tagging for governance.
-- Optimize AWS storage and operational costs.
-
----
-
-# Author
-
-**Seema Yadav**
-
-AWS Lambda Automation Assignments
