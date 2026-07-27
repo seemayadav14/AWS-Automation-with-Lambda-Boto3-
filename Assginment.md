@@ -42,7 +42,7 @@ Automatically identify and delete files older than 30 days from an S3 bucket.
 
 ### Screenshot
 
-![S3 Bucket](images/s3-bucket.png)
+![S3 Bucket](02.png)
 
 ---
 
