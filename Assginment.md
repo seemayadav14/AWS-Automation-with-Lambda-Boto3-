@@ -1,102 +1,175 @@
+# AWS Lambda Assignment – Automated S3 Bucket Cleanup
 
-Serverless-Architecture_HeroVired-Assignment
-HeroVired Assignment on Serverless Architecture using AWS Lambda and Boto3
+## 📌 Project Overview
 
-Assignment 1: Automated S3 Bucket Cleanup Using AWS Lambda and Boto3
-Objective: In this assignment, we will gain experience with AWS Lambda and Boto3 by creating a Lambda function that will automatically clean up old files in an S3 bucket.
-Task: Automate the deletion of files older than 30 days in a specific S3 bucket.
-                                 
-                                                                                  
-Step 1: S3 Setup
-1.Navigate to the S3 dashboard and create a new bucket.
- 
-2.Upload multiple files to this bucket, ensuring that some files are older than 30 days (you may need to adjust your system's date temporarily for this or use old files). 
- 
+This project automates the deletion of objects older than **30 days** from an Amazon S3 bucket using **AWS Lambda** and **Amazon EventBridge**.
 
- 
- 
-Step 2: Lambda IAM Role
-1.In the IAM dashboard, create a new role for Lambda by attaching the following roles AmazonS3FullAccess and AWSLambdaBasicExecutionRole.
- 
+---
 
-2.IAM Role Inline Policy
- 
- 
+## 🎯 Objective
 
-Step 3: Lambda Function
-1.Navigate to the Lambda dashboard, create a new function by choosing Python 3.14 as the runtime and assign the custom role created previous step.
- 
-2.Write the Boto3 Python script to:
-i.	Initialize a boto3 S3 client.
-ii.	List objects in the specified bucket.
-iii.	Delete objects older than 30 days.
-iv.	Print the names of deleted objects for logging purposes
+Automatically identify and delete files older than 30 days from an S3 bucket.
 
-import boto3
-from datetime import datetime, timezone, timedelta
+---
 
-s3 = boto3.client('s3')
+## 🛠️ AWS Services Used
 
-BUCKET_NAME = 'seema-s3-cleanup-bucket'
+* AWS Lambda
+* Amazon S3
+* Amazon EventBridge
+* AWS IAM
+* Amazon CloudWatch
 
-def lambda_handler(event, context):
+---
 
-    days_old = 30
+## 📋 Prerequisites
 
-    cutoff_date = datetime.now(timezone.utc) - timedelta(minutes=1)
+* AWS Account
+* IAM Role with required permissions
+* S3 Bucket
+* Python 3.12 Runtime
+* Boto3 Library (available in Lambda)
 
-    response = s3.list_objects_v2(
-        Bucket=BUCKET_NAME
-    )
+---
 
-    deleted_files = []
+# Step 1: Create an S3 Bucket
 
-    if 'Contents' in response:
+1. Open the AWS Management Console.
+2. Navigate to **Amazon S3**.
+3. Click **Create Bucket**.
+4. Enter a unique bucket name.
+5. Create the bucket.
 
-        for obj in response['Contents']:
+### Screenshot
 
-            object_key = obj['Key']
-            last_modified = obj['LastModified']
+![S3 Bucket](images/s3-bucket.png)
 
-            if last_modified < cutoff_date:
+---
 
-                s3.delete_object(
-                    Bucket=BUCKET_NAME,
-                    Key=object_key
-                )
+# Step 2: Upload Test Files
 
-                deleted_files.append(object_key)
+Upload a few files to the bucket for testing.
 
-                print(
-                    f"Deleted: {object_key}"
-                )
+### Screenshot
 
-   print(
-       f"Total Deleted Files: {len(deleted_files)}"
-    )
+![Upload Files](images/upload-files.png)
 
-    return {
-        'statusCode': 200,
-        'deleted_files': deleted_files
-   }
+---
 
+# Step 3: Create IAM Role
 
-Step 4:Deployment of code with Lambda function
- 
-Step 5: Manual Invocation
-1.After saving the function, manually trigger i 
-2.Go to the S3 dashboard and confirm that only files newer than 30 days remain.
- 
+Create an IAM role with permissions:
 
-3.Check in CloudWatch logs the files which were deleted.
- 
- 
+* s3:ListBucket
+* s3:DeleteObject
 
+Attach the role to the Lambda function.
 
+### Screenshot
 
+![IAM Role](images/iam-role.png)
 
+---
 
+# Step 4: Create Lambda Function
 
+1. Open AWS Lambda.
+2. Click **Create Function**.
+3. Select **Author from Scratch**.
+4. Runtime: **Python 3.12**
+5. Attach the IAM role.
 
+### Screenshot
 
+![Lambda Function](images/lambda-function.png)
 
+---
+
+# Step 5: Add Python Code
+
+Paste the Python code into the Lambda editor and deploy the function.
+
+### Screenshot
+
+![Lambda Code](images/lambda-code.png)
+
+---
+
+# Step 6: Configure EventBridge Trigger
+
+1. Open Amazon EventBridge.
+2. Create a scheduled rule.
+3. Configure it to trigger the Lambda function automatically.
+
+### Screenshot
+
+![EventBridge](images/eventbridge.png)
+
+---
+
+# Step 7: Test the Lambda Function
+
+1. Click **Test**.
+2. Execute the function.
+3. Verify that old files are deleted.
+
+### Screenshot
+
+![Lambda Test](images/lambda-test.png)
+
+---
+
+# Step 8: Verify CloudWatch Logs
+
+Open **CloudWatch Logs** to verify successful execution.
+
+### Screenshot
+
+![CloudWatch Logs](images/cloudwatch-logs.png)
+
+---
+
+# 📂 Repository Structure
+
+```text
+AWS-S3-Cleanup/
+│
+├── README.md
+├── lambda_function.py
+├── images/
+│   ├── s3-bucket.png
+│   ├── upload-files.png
+│   ├── iam-role.png
+│   ├── lambda-function.png
+│   ├── lambda-code.png
+│   ├── eventbridge.png
+│   ├── lambda-test.png
+│   └── cloudwatch-logs.png
+```
+
+---
+
+# ▶️ How to Run
+
+1. Create the S3 bucket.
+2. Upload sample files.
+3. Create the IAM role.
+4. Deploy the Lambda function.
+5. Configure the EventBridge trigger.
+6. Test the Lambda function.
+7. Verify the CloudWatch logs.
+
+---
+
+# ✅ Expected Output
+
+* Objects older than 30 days are automatically deleted.
+* Successful execution is recorded in CloudWatch Logs.
+
+---
+
+# 👩‍💻 Author
+
+**Seema Yadav**
+
+AWS Lambda Automation Assignment
